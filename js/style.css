@@ -299,6 +299,7 @@ hr {
 .laptop-image {
   width: 100%;
   max-width: 545px;
+  filter: opacity(0.5);
 }
 
 .phone-section {
@@ -872,6 +873,53 @@ hr {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+#img-modal {
+  display: none; /* скрыто по умолчанию */
+  position: fixed;
+  z-index: 1000;
+  left: 0; 
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none; /* чтобы клики не проходили */
+}
+
+#img-modal.show {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#img-modal-content {
+  display: block;
+  margin: 5% auto;
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.img-modal__close {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.img-modal__close:hover {
+  color: #ff5555;
 }
 
 .button {
@@ -1540,6 +1588,40 @@ hr {
   display: none;
 }
 
+
+
+
+
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  z-index: 999;
+  background-color: var(--color1); 
+  color: #fff;
+  border: none;
+  border-radius: 38px;
+  padding: 14px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  display: none; /* скрыта по умолчанию */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  transition: opacity 0.3s ease;
+  z-index: 9999
+}
+#scrollTopBtn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+  /* opacity: 0.8; */
+}
+
+
+
+
+
+
 @media (max-width: 768px) {
   .seven {
     padding: 0px 20px 30px;
@@ -1610,12 +1692,44 @@ hr {
 }
 
 
+/* таймер*/
+
+.promo-timer {
+  background-color: var(--color1); /* насыщенный зелёный (например, как var(--color1) из твоего стиля) */
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  font-family: SF Pro Display, sans-serif;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.promo-timer h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.promo-timer p {
+  font-size: 20px;
+  margin: 0;
+}
+
+#countdown {
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 1.5px;
+}
+
+
 /* Footer styles */
 .footer {
   background-color: #ffffff;
   border-top: 1px solid #eeeeee;
   padding: 20px 0;
-  font-family: Arial, sans-serif;
+  font-family: SF Pro Display, sans-serif;
   width: 100%;
 }
 
@@ -1633,11 +1747,19 @@ hr {
   display: flex;
   align-items: center;
   font-size: 24px;
+  
 }
 
 .footer-logo img {
   height: 30px;
   margin-right: 10px;
+  transition: transform 0.6s cubic-bezier(0.25, 1.25, 0.5, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.footer-logo img.animate-logo {
+  transform: perspective(500px) rotateY(25deg) rotateX(10deg) scale(1.2);
 }
 
 .footer-contact {

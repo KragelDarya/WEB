@@ -97,7 +97,6 @@
                                 </ul>
                                 <button class="cta-button">
                                     <span>Оставить заявку<br>и получить КП</span>
-                                    <!-- <a>Оставить заявку<br>и получить КП</a> -->
                                 </button>
                             </div>
                             <div class="laptop-section">
@@ -345,7 +344,8 @@
                 <span class="cont4-title">Проекты</span>
                 <a href="#" class="inactive-button">Лендинг</a>
 	            <button type="button" class="btn btn-success">Многостраничный сайт</button>
-                <a href="#" class="button">Интернет-магазин</a>
+                <a href="#" class="button" id="btn1" title="Нажмите, чтобы перейти в интернет магазин!">Интернет-магазин</a>
+                
             </div>
         </div>
 
@@ -364,6 +364,10 @@
             <div class="item extra"><img src="../image/FOUR/дом 1.jpg" alt="11" /></div>
             <div class="item extra"><img src="../image/FOUR/изоляция 1.jpg" alt="12" /></div>
         </div>
+        <div id="img-modal">
+            <span class="img-modal__close">&times;</span>
+            <img id="img-modal-content" alt="">
+        </div>
         <div class="text1 mobile-only" id="toggleContainer">
             <button id="toggleButton" class="buttonpic">Загрузить еще</button>
         </div>
@@ -371,7 +375,6 @@
 
          <div class="about-section">
             <img src="../image/FIVE/fon52.png" class="fon52" alt="fon52">
-            <!-- Left panel with background image and person -->
             <div class="left-panel">
                 
                 <div class="name-tag">Стас Михайлов</div>
@@ -487,6 +490,16 @@
                     <img src="../image/SEVEN/Каталог 8.png" alt="GRANSS Буклет" class="brochure-image" />
                 </div>
             </div>
+            <button id="scrollTopBtn">Наверх ↑</button>
+        </section>
+
+
+        <!-- таймер -->
+        <section class="promo-timer">
+            <div class="promo-content">
+                <h2>Акция на первый заказ!!!</h2>
+                <p>До окончания осталось: <span id="countdown">00:00:00</span></p>
+            </div>
         </section>
 
 
@@ -494,7 +507,7 @@
         <footer class="footer">
             <div class="footer-container">
                 <div class="footer-logo">
-                    <img src="../image/Header/logo_grans_2 2.png" alt="RANSS Logo">
+                    <img src="../image/Header/logo_grans_2 2.png" alt="RANSS Logo" id="footerLogo">
                     <a>RANSS</a>
                 </div>
                 <div class="footer-contact">
@@ -543,7 +556,15 @@
         <script src="../js/hider.js"></script>
         <script src="../js/liker.js"></script>
         <script src="../js/ellipse.js"></script>
+        <script src="../js/UP.js"></script>
+        <script src="../js/logo.js"></script>
+        <script src="../js/message.js"></script>
+        <script src="../js/timer.js"></script>
+        <script src="../js/imagesss.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        
+        <script>$(document).ready(function () {
+    $('#btn1').tooltip(); // Инициализация подсказки
+});</script>
     </body>
 </html>

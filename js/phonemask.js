@@ -1,13 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const phoneInputs = document.querySelectorAll('input[type="tel"]');
+  const form = document.querySelector('.form-box');
+  const nameInput = form.querySelector('input[type="text"]');
+  const phoneInput = form.querySelector('input[type="tel"]');
+  const sendBtn = form.querySelector('button.send');
 
-  phoneInputs.forEach(input => {
-    input.addEventListener('input', maskPhone);
-    input.addEventListener('focus', maskPhone);
-    input.addEventListener('blur', maskPhone);
-    input.addEventListener('keydown', maskPhone);
-  });
-
+  // Маска телефона (без изменений)
   function maskPhone(event) {
     let keyCode;
     if (event.keyCode) {
@@ -35,12 +32,68 @@ document.addEventListener('DOMContentLoaded', function () {
 
     reg = new RegExp("^" + reg + "$");
 
-    if (!reg.test(input.value) || input.value.length < 5 || keyCode > 47 && keyCode < 58) {
+    if (!reg.test(input.value) || input.value.length < 5 || (keyCode > 47 && keyCode < 58)) {
       input.value = newValue;
     }
 
     if (event.type === "blur" && input.value.length < 18) {
       input.value = "";
+    }
+  }
+
+  phoneInput.addEventListener('input', maskPhone);
+  phoneInput.addEventListener('focus', maskPhone);
+  phoneInput.addEventListener('blur', maskPhone);
+  phoneInput.addEventListener('keydown', maskPhone);
+
+  // Валидация формы
+  sendBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const nameValue = nameInput.value.trim();
+    const phoneValue = phoneInput.value.trim();
+
+    const nameIsValid = /^[а-яА-ЯёЁa-zA-Z\s\-]+$/.test(nameValue) && nameValue.length > 0;
+    const phoneIsValid = phoneValue.length === 18; // строго по маске
+
+    clearError(nameInput);
+    clearError(phoneInput);
+
+    let isValid = true;
+
+    if (!nameIsValid) {
+      showError(nameInput, 'Введите корректное имя (только буквы)');
+      isValid = false;
+    }
+
+    if (!phoneIsValid) {
+      showError(phoneInput, 'Введите полный номер телефона');
+      isValid = false;
+    }
+
+    if (isValid) {
+      alert('Форма успешно отправлена!');
+      // Можно тут отправить форму или сбросить поля
+    }
+  });
+
+  function showError(input, message) {
+    input.style.borderColor = 'red';
+    if (!input.nextElementSibling || !input.nextElementSibling.classList.contains('error-message')) {
+      let errorElem = document.createElement('div');
+      errorElem.className = 'error-message';
+      errorElem.style.color = 'red';
+      errorElem.style.fontSize = '12px';
+      errorElem.style.marginTop = '4px';
+      errorElem.textContent = message;
+      input.parentNode.insertBefore(errorElem, input.nextSibling);
+    }
+  }
+
+  function clearError(input) {
+    input.style.borderColor = '#ddd';
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('error-message')) {
+      input.nextElementSibling.remove();
     }
   }
 });

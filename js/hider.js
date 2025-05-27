@@ -18,17 +18,15 @@ document.addEventListener("DOMContentLoaded", function () {
       toggleButton.textContent = expanded ? 'Скрыть' : 'Загрузить еще';
 
       if (!expanded) {
-        // Подождать один тик, чтобы скрытие применилось
         setTimeout(() => {
           imageGrid.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
           });
-        }, 100); // Небольшая задержка (100 мс — надёжно)
+        }, 100); 
       }
     });
   } else {
-    // На десктопе — показываем всё и скрываем кнопку
     extraItems.forEach(item => item.style.display = 'block');
     toggleContainer.style.display = 'none';
   }
